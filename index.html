@@ -53,11 +53,21 @@
     .side-nav ul li a:hover {
       text-decoration: underline;
     }
+    .main-section {
+      flex: 1;
+      padding: 20px;
+      display: none;
+    }
+    .main-section.active {
+      display: block;
+    }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const listItems = document.querySelectorAll(".side-nav > ul > li > a");
       const subGuidelines = document.querySelectorAll(".side-nav ul li ul > li > a");
+      const criteriaLinks = document.querySelectorAll(".side-nav ul li ul ul li a");
+      const mainSection = document.getElementById("main-content");
 
       listItems.forEach(item => {
         item.addEventListener("click", function (event) {
@@ -78,14 +88,23 @@
           }
         });
       });
+
+      criteriaLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          const content = this.textContent;
+          mainSection.innerHTML = `<h2>Pass/Fail scenarios for ${content}</h2><p>Work in progress we will get back soon!</p>`;
+          mainSection.classList.add("active");
+        });
+      });
     });
   </script>
 </head>
 <body>
-  <h1 class="main-heading">WCAG 2.1 Scenarios with examples</h1>
+  <h1 class="main-heading">WCAG 2.1 Guidelines Examples</h1>
   <div class="container">
     <nav class="side-nav">
-      <h2>Guidelines</h2>
+      <h2>Accessibility Principles</h2>
       <ul>
         <li><a href="#">Perceivable</a>
           <ul>
@@ -189,6 +208,7 @@
         </li>
       </ul>
     </nav>
+    <main id="main-content" class="main-section"></main>
   </div>
 </body>
 </html>
