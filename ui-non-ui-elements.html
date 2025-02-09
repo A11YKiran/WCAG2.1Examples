@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>UI and Non-UI Elements</title>
+ <style>
+ body {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ margin: 0;
+ font-family: Arial, sans-serif;
+ background-color: #f4f4f4;
+ color: #333;
+ padding: 20px;
+ position: relative;
+}
+
+h1 {
+ font-size: 2em;
+ color: #555;
+ text-align: center;
+}
+
+.main-page {
+ text-align: center;
+ margin: 20px 0;
+ padding-bottom: 10px;
+ position: relative;
+}
+
+/* Simple design under the "Main Page" header */
+.main-page::after {
+ content: '';
+ position: absolute;
+ bottom: 0;
+ left: 50%;
+ transform: translateX(-50%);
+ width: 80%;
+ height: 2px;
+ background-color: #ccc;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+ display: flex;
+ justify-content: space-between;
+ width: 100%;
+ padding-top: 20px;
+ position: relative;
+}
+
+.left, .right {
+ width: 45%;
+ padding: 20px;
+ position: relative;
+ background-color: #fff;
+ border-radius: 8px;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.left {
+ background-color: #e3f2fd; /* Light blue background for UI section */
+}
+
+.right {
+ background-color: #fff3e0; /* Light orange background for Non-UI section */
+}
+
+h2 {
+ color: #444;
+}
+
+.element {
+ margin: 10px 0;
+ opacity: 0; /* Initially hidden */
+ transform: translateY(20px); /* Start slightly below */
+ transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.element.visible {
+ opacity: 1; /* Make visible */
+ transform: translateY(0); /* Move to original position */
+}
+
+button, input[type="radio"], input[type="checkbox"], select, textarea {
+ margin: 5px 0;
+ cursor: pointer; /* Hand symbol for interactive elements */
+}
+
+/* Ensure radio button and label, checkbox and label are in the same line */
+input[type="radio"], input[type="checkbox"] {
+ display: inline-block;
+ vertical-align: middle;
+ margin-right: 5px;
+}
+
+label {
+ display: inline-block;
+ vertical-align: middle;
+ cursor: pointer;
+}
+
+table {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 20px 0;
+}
+
+table, th, td {
+ border: 1px solid #ddd;
+}
+
+th, td {
+ padding: 10px;
+ text-align: left;
+}
+
+/* Replace bullet points with pointing hand symbol */
+ul {
+ list-style: none; /* Remove default bullets */
+ padding-left: 0; /* Remove default padding */
+}
+
+ul li {
+ display: flex; /* Align hand symbol and content in the same line */
+ align-items: center; /* Vertically center the content */
+ margin: 10px 0; /* Add some spacing between list items */
+}
+
+ul li::before {
+ content: "👉"; /* Pointing hand symbol */
+ margin-right: 10px; /* Space between symbol and text */
+}
+
+ol {
+ list-style-type: decimal; /* Keep numbers for ordered lists */
+ padding-left: 20px;
+}
+
+img {
+ max-width: 100%;
+ height: auto;
+}
+
+.toggle-switch {
+ position: relative;
+ display: inline-block;
+ width: 60px;
+ height: 34px;
+}
+
+.toggle-switch input {
+ opacity: 0;
+ width: 0;
+ height: 0;
+}
+
+.slider {
+ position: absolute;
+ cursor: pointer;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background-color: #ccc;
+ transition: .4s;
+ border-radius: 34px;
+}
+
+.slider:before {
+ position: absolute;
+ content: "";
+ height: 26px;
+ width: 26px;
+ left: 4px;
+ bottom: 4px;
+ background-color: white;
+ transition: .4s;
+ border-radius: 50%;
+}
+
+input:checked + .slider {
+ background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+ transform: translateX(26px);
+}
+ </style>
+</head>
+<body>
+ <h1>UI and Non-UI Elements</h1>
+ <h2 class="main-page">Main Page</h2>
+ <div class="container">
+ <div class="left">
+ <h3>UI Elements</h3>
+ <div class="tree">
+ <ul>
+ <li><div class="element"><a href="#">Link</a></div></li>
+ <li><div class="element"><button>Button</button></div></li>
+ <li><div class="element">
+ <input type="radio" name="radio" id="radio1">
+ <label for="radio1">Radio Button</label>
+ </div></li>
+ <li><div class="element">
+ <input type="checkbox" id="checkbox1">
+ <label for="checkbox1">Checkbox</label>
+ </div></li>
+ <li><div class="element">
+ <label for="dropdown">Dropdown:</label>
+ <select id="dropdown">
+ <option>Option 1</option>
+ <option>Option 2</option>
+ <option>Option 3</option>
+ </select>
+ </div></li>
+ <li><div class="element">
+ <label for="menu">Menu:</label>
+ <select id="menu">
+ <option>Menu Item 1</option>
+ <option>Menu Item 2</option>
+ <option>Menu Item 3</option>
+ </select>
+ </div></li>
+ <li><div class="element">
+ <label for="combobox">Combo Box:</label>
+ <input type="text" id="combobox" list="combobox-options">
+ <datalist id="combobox-options">
+ <option value="Option 1">
+ <option value="Option 2">
+ <option value="Option 3">
+ </datalist>
+ </div></li>
+ <li><div class="element">
+ <label for="datepicker">Date Picker:</label>
+ <input type="date" id="datepicker">
+ </div></li>
+ <li><div class="element">
+ <label for="optional-edit">Optional Edit Box:</label>
+ <input type="text" id="optional-edit">
+ </div></li>
+ <li><div class="element">
+ <label for="required-edit">Required Edit Box:</label>
+ <input type="text" id="required-edit" required>
+ </div></li>
+ <li><div class="element">
+ <label for="password-edit">Password Edit Box:</label>
+ <input type="password" id="password-edit">
+ </div></li>
+ <li><div class="element">
+ <label for="search-edit">Search Edit Box:</label>
+ <input type="search" id="search-edit">
+ </div></li>
+ <li><div class="element">
+ <label for="multiline-edit">Multiline Edit Box:</label>
+ <textarea id="multiline-edit"></textarea>
+ </div></li>
+ <li><div class="element">
+ <h3>Accordion</h3>
+ <details>
+ <summary>Section 1</summary>
+ <p>Content for section 1.</p>
+ </details>
+ <details>
+ <summary>Section 2</summary>
+ <p>Content for section 2.</p>
+ </details>
+ </div></li>
+ <li><div class="element">
+ <label for="toggle-button">Toggle Button:</label>
+ <label class="toggle-switch">
+ <input type="checkbox" id="toggle-button">
+ <span class="slider"></span>
+ </label>
+ </div></li>
+ <li><div class="element">
+ <h3>Carousel Section</h3>
+ <!-- Carousel code would go here -->
+ </div></li>
+ </ul>
+ </div>
+ </div>
+ <div class="right">
+ <h3>Non-UI Elements</h3>
+ <div class="tree">
+ <ul>
+ <li><div class="element">
+ <p>This is a paragraph of text.</p>
+ </div></li>
+ <li><div class="element">
+ <ul>
+ <li>Unordered List Item 1</li>
+ <li>Unordered List Item 2</li>
+ <li>Unordered List Item 3</li>
+ </ul>
+ <ol>
+ <li>Ordered List Item 1</li>
+ <li>Ordered List Item 2</li>
+ <li>Ordered List Item 3</li>
+ </ol>
+ </div></li>
+ <li><div class="element">
+ <table>
+ <tr>
+ <th>Header 1</th>
+ <th>Header 2</th>
+ <th>Header 3</th>
+ </tr>
+ <tr>
+ <td>Row 1, Cell 1</td>
+ <td>Row 1, Cell 2</td>
+ <td>Row 1, Cell 3</td>
+ </tr>
+ <tr>
+ <td>Row 2, Cell 1</td>
+ <td>Row 2, Cell 2</td>
+ <td>Row 2, Cell 3</td>
+ </tr>
+ </table>
+ </div></li>
+ <li><div class="element">
+ <h3>Heading</h3>
+ <p>This is a heading example.</p>
+ </div></li>
+ <li><div class="element">
+ <img src="https://via.placeholder.com/150" alt="Informative Image">
+ </div></li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <script>
+ // Function to animate elements one by one
+ function animateElements() {
+ const elements = document.querySelectorAll('.element');
+ elements.forEach((element, index) => {
+ setTimeout(() => {
+ element.classList.add('visible');
+ }, index * 200); // Delay each element by 200ms
+ });
+ }
+
+ // Trigger the animation when the page loads
+ window.onload = animateElements;
+ </script>
+</body>
+</html>
