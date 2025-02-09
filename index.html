@@ -1,1065 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accessibility Guidelines Navigation</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-    }
-    .container {
-      display: flex;
-    }
-    .main-heading {
-      margin: 20px;
-      font-family: Arial, sans-serif;
-    }
-.close-dialog-top {
- background-color: #003399 !important; /* Default button color */
- color: white !important;
-      border: none !important;
-      padding: 10px 15px;
-      cursor: pointer;
-    }
-
-.close-dialog-top:hover,
-.close-dialog-top:focus,
-.close-dialog-top:active {
-      background-color: #003399 !important; /* Maintain color on hover, focus, and active */
-      color: white !important;
-      border: none !important;
-      box-shadow: none !important; /* Remove any shadow that might appear on hover */
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>UI and Non-UI Elements</title>
+ <style>
+ body {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ margin: 0;
+ font-family: Arial, sans-serif;
+ background-color: #f4f4f4;
+ color: #333;
+ padding: 20px;
+ position: relative;
 }
 
-
-    .banner {
-      background-color: #003399;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: calc(100% - 30px); /* Ensure full-width without being cut off */
- height: 50px;
-      z-index: 1000;
- 
-    }
-    .banner h1 {
-      margin: 0;
-    }
-    .banner a {
-      color: white;
-      text-decoration: underline;
-      font-weight: bold;
-      position: relative;
- margin: 0 1px 0 0;
-      text-align: right;
-}
-    .banner a::after {
-      content: '\2197';
-      font-size: 0.8em;
- margin: 0 5px 0 2px;
-}
-.banner-title {
-      flex: 1;
-      text-align: left; /* Align 'WCAG 2.1 Documentation' to the left */
-    }
-
-    .banner-content {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end; /* Align links and button to the right */
-      gap: 20px; /* Even spacing between links and button */
-      flex: 1;
-    }
-
-    .banner button {
-margin: 0 0 0 10px;
-}
-   
-    .side-nav {
-      background-color: #2c3e50;
-      color: white;
-      width: 300px;
- flex-shrink: 0;
-      padding: 20px;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-      height: calc(100vh - 140px); /* Adjust for banner height */
-      position: fixed;
-      top: 50px;
- bottom: 30px;
- left: 0;
- overflow-y: auto;
-      z-index: 999;
-
-    }
-    .side-nav h2 {
-      color: #ecf0f1;
-    }
-    .side-nav ul {
-      list-style: none;
-      padding: 0;
-    }
-    .side-nav ul li {
-      margin: 10px 0;
-    }
-    .side-nav ul li ul {
-      margin-top: 5px;
-      margin-left: 20px;
-      list-style-type: disc;
-      display: none;
-    }
-    .side-nav ul li ul ul {
-      margin-left: 20px;
-      list-style-type: circle;
-      display: none;
-    }
-    .side-nav ul li a {
-      color: #ecf0f1;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .side-nav ul li a:hover {
-      text-decoration: underline;
-    }
-    .main-section {
-      flex: 1;
-      padding: 20px;
- padding-bottom: 70px;
- padding-left: 50px;
- margin-left: 300px;
-      margin-top: 70px;
-      margin-left: 320px; /* Increase to match side-nav width + padding */
-      position: relative;
-      overflow-y: auto;
-      padding-bottom: 70px; /* Prevent content from hiding under the footer */
-      min-height: calc(100vh - 140px); /* Adjust for banner and footer height */
-    }
-    .main-section::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: rgba(0, 0, 0, 0.5);
-      font-size: 2em;
-      white-space: nowrap;
-      pointer-events: none;
- display: var(--watermark-display, block); /* Add this line */
-    }
-    .main-section.active {
-      display: block;
-    }
-.pass-scenarios h4,
-.fail-scenarios h4 {
-      font-style: italic;
- color: #333333
-}
-.page-footer {
-      background-color: #00008B;
-      color: white;
-      text-align: center;
-      padding: 15px 0;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
- height: 20px;
-      z-index: 998;
+h1 {
+ font-size: 2em;
+ color: #555;
+ text-align: center;
 }
 
-.page-footer ul {
-list-style: none;
-padding: 0;
-margin: 0;
+.main-page {
+ text-align: center;
+ margin: 20px 0;
+ padding-bottom: 10px;
+ position: relative;
 }
 
-.page-footer ul li {
-display: inline;
-margin: 0 15px;
+/* Simple design under the "Main Page" header */
+.main-page::after {
+ content: '';
+ position: absolute;
+ bottom: 0;
+ left: 50%;
+ transform: translateX(-50%);
+ width: 80%;
+ height: 2px;
+ background-color: #ccc;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.page-footer a {
-color: #ecf0f1;
-text-decoration: none;
-font-weight: bold;
-}
-
-.page-footer a:hover {
-text-decoration: underline;
-}
 .container {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-.content-wrapper {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-    }
-.pdf-icon {
-width: 16px;      /* Adjust icon size */
-height: auto;
-vertical-align: middle; /* Align icon with text */
-margin-right: 5px;      /* Add space between icon and text */
-}
-/* Dialog Box Styling */
-    .dialog-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-
-    .dialog-box {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      width: 80%;
-      max-width: 400px;
-      position: relative;
-    }
-
-    .dialog-box h2 {
-      margin-top: 0;
-      color: #003399;
-    }
-
-    .dialog-box button {
-      background-color: #003399;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin-top: 15px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    .dialog-box button:hover {
-      background-color: #002080;
-    }
-
-    .close-dialog-top {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      background: transparent;
-      border: none;
-      font-size: 20px;
-      font-weight: bold;
-      color: #003399;
-      cursor: pointer;
-    }
-
-    .close-dialog-top:hover {
-      color: #002080;
-    }
-/* Visible Focus Indicator for All UI Elements */
-    *:focus {
-      outline: 3px solid #CC8500; /* Bright Orange Color */
-      outline-offset: 2px;
-    }
-/* Skip Link Styling */
-    .skip-link {
-      position: absolute;
-      top: -1000px;
-      left: 0;
-      background: #FFA500; /* Bright Orange */
-      color: white;
-      padding: 10px 15px;
-      z-index: 1001;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 5px;
-    }
-
-    .skip-link:focus {
-      top: 10px; /* Moves link into view when focused */
-    }
-
-.highlighted-section {
-  background-color: #f0f0f0; /* Light gray background color */
-  padding: 20px; /* Add some padding around the content */
-  border-radius: 5px; /* Optional: Add rounded corners */
-  margin-bottom: 20px; /* Space between sections if needed */
-  /* Other styling as needed */
+ display: flex;
+ justify-content: space-between;
+ width: 100%;
+ padding-top: 20px;
+ position: relative;
 }
 
-.highlighted-section h4 {
-  margin-bottom: 10px; /* Space between headings */
-  color: #333; /* Darker text color for contrast */
+.left, .right {
+ width: 45%;
+ padding: 20px;
+ position: relative;
+ background-color: #fff;
+ border-radius: 8px;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Example of a different background color for a specific section */
-.highlighted-section.blue-bg {
-  background-color: #e0f2f7; /* Light blue background */
+.left {
+ background-color: #e3f2fd; /* Light blue background for UI section */
 }
 
-.pass-scenarios {
-    background-color: #e0f7fa; /* Light blue background */
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+.right {
+ background-color: #fff3e0; /* Light orange background for Non-UI section */
 }
 
-.fail-scenarios {
-    background-color: #ffebee; /* Light red background */
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-.button-container {
-    display: flex;
-    gap: 10px; /* Adjust the gap between buttons as needed */
+h2 {
+ color: #444;
 }
 
-.color-button, .size-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px; /* Adjust font size as needed */
+.element {
+ margin: 10px 0;
+ opacity: 0; /* Initially hidden */
+ transform: translateY(20px); /* Start slightly below */
+ transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.imgdesmodal { /* Changed class name here */
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
 
-  /* Style for the modal content */
-.imgdesmodal-content { /* Changed class name here */
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
+.element.visible {
+ opacity: 1; /* Make visible */
+ transform: translateY(0); /* Move to original position */
+}
 
-  /* Style for the close button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
+button, input[type="radio"], input[type="checkbox"], select, textarea {
+ margin: 5px 0;
+ cursor: pointer; /* Hand symbol for interactive elements */
+}
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const principles = document.querySelectorAll(".side-nav > ul > li > a");
-    const guidelines = document.querySelectorAll(".side-nav > ul > li > ul > li > a");
-    const criteriaLinks = document.querySelectorAll(".side-nav > ul > li > ul > li > ul > li > a");
-    const mainSection = document.getElementById("main-content");
+/* Ensure radio button and label, checkbox and label are in the same line */
+input[type="radio"], input[type="checkbox"] {
+ display: inline-block;
+ vertical-align: middle;
+ margin-right: 5px;
+}
 
-    principles.forEach(principle => {
-        principle.addEventListener("click", function (event) {
-            event.preventDefault();
-            const guidelineList = this.parentElement.querySelector("ul");
-            if (guidelineList) {
-                guidelineList.style.display = (guidelineList.style.display === "block") ? "none" : "block";
-            }
-        });
-    });
+label {
+ display: inline-block;
+ vertical-align: middle;
+ cursor: pointer;
+}
 
-    guidelines.forEach(guideline => {
-        guideline.addEventListener("click", function (event) {
-            event.preventDefault();
-            const criteriaList = this.parentElement.querySelector("ul");
-            if (criteriaList) {
-                criteriaList.style.display = (criteriaList.style.display === "block") ? "none" : "block";
-            }
-        });
-    });
+table {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 20px 0;
+}
 
-    criteriaLinks.forEach(link => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            const content = this.textContent.trim();
-            const mainSection = document.getElementById("main-content"); // Inside click handler
+table, th, td {
+ border: 1px solid #ddd;
+}
 
-            if (content === "1.1.1 Non-text Content (Level A)") {
-                mainSection.innerHTML = `
-                    <h2>${content}</h2>
-                    <div style="margin-bottom: 20px;">
-                        <h3>Pass Scenarios</h3>
-                        <div class="pass-scenarios">
-                            <h4>Simple Informative Image</h4>
-                            <img src="butterflylifecycle.jpg" alt="Illustration of the butterfly life cycle showing the stages: egg on a leaf, caterpillar, chrysalis (pupa), and adult butterfly, arranged in a circular sequence." style="width: 50%; height: auto; display: block; margin-bottom: 10px;">
-                            <h4>Image with Long Description</h4>
-                            
-                            <h4>Logo Image</h4>
-                            <img src="logo.png" alt="Company logo" style="width: 20%; height: auto; display: block; margin-bottom: 10px;">
-                            <h4>Icon used without visible label</h4>
-                            <img src="logo.png" alt="Company logo" style="width: 20%; height: auto; display: block; margin-bottom: 10px;">
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Fail Scenarios</h3>
-                        <div class="fail-scenarios">
-                            <h4>Image without 'alt' attribute</h4>
-                            <img src="complex-diagram.jpg" style="width: 50%; height: auto; display: block; margin-bottom: 10px;">
-                            <h4>Decorative image with 'alt' value</h4>
-                            <img src="complex-diagram.jpg" alt="decorative image" style="width: 50%; height: auto; display: block; margin-bottom: 10px;">
-                            <h4>Decorative image with 'alt' value as repeated visible text</h4>
-                            <img src="complex-diagram.jpg" alt="A high end Audi car" style="width: 50%; height: auto; display: block; margin-bottom: 10px;">
-                            <h4>Icon used with text label</h4>
-                            <img src="complex-diagram.jpg" alt="A high end Audi car" style="width: 50%; height: auto; display: block; margin-bottom: 10px;">
-                        </div>
-                    </div>`;
-            } else if (content === "1.3.1 Info and Relationships (Level A)") { // Added 1.3.1 content
-                mainSection.innerHTML = `
-                    <h2>${content}</h2>
-                    <div>
-                        <h3>Pass Scenarios</h3>
-                        <div class="pass-scenarios">
-                            <h4>Radio Grouping</h4>
-<form>
-                                <fieldset>
-                                    <legend>Choose a fruit:</legend>
-                                    <label><input type="radio" name="fruit" value="apple"> Apple</label>
-                                    <label><input type="radio" name="fruit" value="banana"> Banana</label>
-                                    <label><input type="radio" name="fruit" value="cherry"> Cherry</label>
-<label><input type="radio" name="fruit" value="banana"> Mango</label>
-                                    <label><input type="radio" name="fruit" value="cherry"> Orange</label>
-                                </fieldset>
-                            </form>
-                           
-                            <h4>Table Association</h4>
-<table style="border-collapse: collapse; width: 100%;">
-                                <caption>Monthly Sales</caption>
-                                <thead>
-                                    <tr>
-                                        <th scope="column" style="border: 1px solid black; padding: 8px;">Month</th>
-                                        <th scope="row" style="border: 1px solid black; padding: 8px;">Sales</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="border: 1px solid black; padding: 8px;">January</td>
-                                        <td style="border: 1px solid black; padding: 8px;">$1000</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border: 1px solid black; padding: 8px;">February</td>
-                                        <td style="border: 1px solid black; padding: 8px;">$1200</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <h4>Form Label Association</h4>
-                            <form>
-                                <label for="name">Name:</label>
-                                <input type="text" id="name" name="name">
-                                <label for="email">Email:</label>
-                                <input type="email" id="email" name="email">
-                            </form>
-                                                       
-                            <h4>Heading Structure</h4>
-<div class="highlighted-section">
-<h1>Main Heading - H1</h1>
-                            <h2>Subheading - H2</h2>
-                            <h3>Sub-subheading - H3</h3>
-                            <h4>Sub-sub-subheading - H4</h4>
-<h2> New Sub heading - H2<h2>
-                            </div>
-                            <h4>Clickable role should skipped with aria role</h4>
-<button href="#" role="link">Click Me</button>
-<h4>Hidden Data shouldn't read by SR</h4>
-                            <div style="position: absolute; left: -9999px;" aria-hidden="true">This content is not read by screen readers as it is not visible on the page.</div>
-                            <h4>SR shouldn't skip the Visible Data</h4>
-                            <div>This content is not skipped by screen readers because this is visible and part of page logical flow.</div>
-                            <h4>Shouldn't Read blanks in the page when elements need a line space</h4>
-<div style="margin-bottom: 20px;">Element 1</div>
-<div style="margin-bottom: 20px;">Element 2</div>
-<div>Element 3</div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Fail Scenarios</h3>
-                        <div class="fail-scenarios">
-                            <h4>Radio Grouping</h4>
-                           
-                            <form>
-                                <label><input type="radio" name="fruit" value="apple"> Apple</label>
-                                <label><input type="radio" name="fruit" value="banana"> Banana</label>
-                                <label><input type="radio" name="fruit" value="cherry"> Cherry</label>
-                            </form>
-                            <h4>Table Association</h4>
-                            <table style="border-collapse: collapse; width: 100%;">
-                                <tr>
-                                    <td style="border: 1px solid black; padding: 8px;">January</td>
-                                    <td style="border: 1px solid black; padding: 8px;">$1000</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: 1px solid black; padding: 8px;">February</td>
-                                    <td style="border: 1px solid black; padding: 8px;">$1200</td>
-                                </tr>
-                            </table>
-                            <h4>Form Label Association</h4>
-                            <form>
-                                <input type="text" id="name" name="name" placeholder="Name">
-                                <input type="email" id="email" name="email" placeholder="Email">
-                            </form>
-                            <h4>Heading Structure</h4>
-<div class="highlighted-section">
-                            <h1>Main Heading - H1</h1>
-                            <h3>Subheading - H3 (skipped the heading level H2)</h3>
-                            <h2>Sub-subheading - H2</h2>
-</div>
-                            <h4>Clickable Role</h4>
-<button href="#" role="link">Click Me</button>
-<h4>Hidden Data</h4>
-                            <div style="position: absolute; left: -9999px;" aria-hidden="false">This content is read by screen readers but not visible on the page.</div>
-                            <h4>SR Skipping Visible Data</h4>
-                            <div aria-hidden="true">This content is not skipped by screen readers because this is visible and part of page logical flow.</div>
-                            <h4>Reading blanks in the page</h4>
-<p>Element 1</p>
-<br>
-<p>Element 2</p>
-<br>
-<p>Element 3</p>
-                                                     
-                        </div>
-                    </div>`;
-            } else {
-                mainSection.innerHTML = `<h2>${content}</h2><h3>Pass Scenarios</h3><h3>Fail Scenarios</h3>`; // Default content
-            }
+th, td {
+ padding: 10px;
+ text-align: left;
+}
 
-if (content === "1.1.1 Non-text Content (Level A)" || content === "1.3.1 Info and Relationships (Level A)") {
-      // Existing logic for 1.1.1 and 1.3.1
-      return;
-    }
+/* Replace bullet points with pointing hand symbol */
+ul {
+ list-style: none; /* Remove default bullets */
+ padding-left: 0; /* Remove default padding */
+}
 
-    // For all other success criteria, add H4 headings under Pass and Fail Scenarios
-    mainSection.innerHTML = `
-      <h2>${content}</h2>
-      <div class="pass-scenarios">
-        <h3>Pass Scenarios</h3>
-        <h4>Correct Implementation Example</h4>
-      </div>
-      <div class="fail-scenarios">
-        <h3>Fail Scenarios</h3>
-        <h4>Incorrect Implementation Example</h4>
-      </div>
-    `;
+ul li {
+ display: flex; /* Align hand symbol and content in the same line */
+ align-items: center; /* Vertically center the content */
+ margin: 10px 0; /* Add some spacing between list items */
+}
 
-            mainSection.classList.add("active");
-            mainSection.style.setProperty('--watermark-display', 'none');
-        });
-    });
-});
+ul li::before {
+ content: "👉"; /* Pointing hand symbol */
+ margin-right: 10px; /* Space between symbol and text */
+}
 
+ol {
+ list-style-type: decimal; /* Keep numbers for ordered lists */
+ padding-left: 20px;
+}
 
-  </script>
-  <script>
-      window.addEventListener('load', function() {
-        const dialogOverlay = document.createElement('div');
-        dialogOverlay.classList.add('dialog-overlay');
+img {
+ max-width: 100%;
+ height: auto;
+}
 
-        dialogOverlay.innerHTML = `
-          <div class="dialog-box" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
-            <button class="close-dialog-top" id="close-dialog-top" aria-label="Close dialog">&times;</button>
-            <h2 id="dialog-title">Website Under Progress</h2>
-            <p>This website is under progress. We will let you know once it's done. Thanks for visiting!</p>
-            <p>You can see the currently added elements on the page.</p>
-            <button id="close-dialog">OK</button>
-          </div>
-        `;
+.toggle-switch {
+ position: relative;
+ display: inline-block;
+ width: 60px;
+ height: 34px;
+}
 
-        document.body.appendChild(dialogOverlay);
+.toggle-switch input {
+ opacity: 0;
+ width: 0;
+ height: 0;
+}
 
-        const closeButtonTop = document.getElementById('close-dialog-top');
-        const closeButtonBottom = document.getElementById('close-dialog');
+.slider {
+ position: absolute;
+ cursor: pointer;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background-color: #ccc;
+ transition: .4s;
+ border-radius: 34px;
+}
 
-        // Set initial focus to the top-right close button
-        closeButtonTop.focus();
+.slider:before {
+ position: absolute;
+ content: "";
+ height: 26px;
+ width: 26px;
+ left: 4px;
+ bottom: 4px;
+ background-color: white;
+ transition: .4s;
+ border-radius: 50%;
+}
 
-        // Trap focus inside the dialog
-        dialogOverlay.addEventListener('keydown', function(event) {
-          const focusableElements = [closeButtonTop, closeButtonBottom];
-          const currentIndex = focusableElements.indexOf(document.activeElement);
+input:checked + .slider {
+ background-color: #2196F3;
+}
 
-          if (event.key === 'Tab') {
-            event.preventDefault();
-            const nextIndex = (currentIndex + (event.shiftKey ? -1 : 1) + focusableElements.length) % focusableElements.length;
-            focusableElements[nextIndex].focus();
-          }
-
-          if (event.key === 'Escape') {
-            dialogOverlay.style.display = 'none';
-          }
-        });
-
-        closeButtonTop.addEventListener('click', function() {
-          dialogOverlay.style.display = 'none';
-        });
-
-        closeButtonBottom.addEventListener('click', function() {
-          dialogOverlay.style.display = 'none';
-        });
-      });
-    </script>
-<script>
-  document.querySelector('.skip-link').addEventListener('click', function(event) {
-    event.preventDefault();
-    const perceivableLink = document.getElementById('perceivable-link');
-    perceivableLink.focus();
-perceivableLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-    // Trap focus inside side navigation after skip link is activated
-    sideNav.addEventListener('keydown', function(e) {
-      if (e.key === 'Tab') {
-        e.preventDefault();
-        const focusableItems = sideNav.querySelectorAll('a, button, input, [tabindex]:not([tabindex="-1"])');
-        if (focusableItems.length > 0) {
-          focusableItems[0].focus();
-        }
-      }
-    }
-
-  });
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const criteriaLinks = document.querySelectorAll(".side-nav > ul > li > ul > li > ul > li > a");
-    criteriaLinks.forEach(link => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            const content = this.textContent.trim();
-            const mainSection = document.getElementById("main-content");
-            if (content === "1.2.2 Captions (Pre-recorded) (Level A)") {
-                mainSection.innerHTML = `
-                    <h2>${content}</h2>
-                    <div style="margin-bottom: 20px;">
-                        <h3>Pass Scenarios</h3>
-                        <div class="pass-scenarios">
-                            <h4>Video with Captions</h4>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/mdOJ717PKRc?si=v6vkZjv4QiPk3yfx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            <p>Description: This video includes captions for all spoken content and important sounds.</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Fail Scenarios</h3>
-<div class="fail-scenarios">
-                            <h4>Video without Captions</h4>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/L3d-iAKNj80?si=-Ush5GH23fpTCM9k&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            <p>Description: This video does not include captions, making it inaccessible for users who are deaf or hard of hearing.</p>
-                        </div>
-                        <!-- Add fail scenarios here -->
-                    </div>`;
-            }
-        });
-    });
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const criteriaLinks = document.querySelectorAll(".side-nav > ul > li > ul > li > ul > li > a");
-    criteriaLinks.forEach(link => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            const content = this.textContent.trim();
-            const mainSection = document.getElementById("main-content");
-            if (content === "1.3.2 Meaningful Sequence (Level A)") {
-                mainSection.innerHTML = `
-                    <h2>${content}</h2>
-                    <div style="margin-bottom: 20px;">
-                        <h3>Pass Scenarios</h3>
-                        <div class="pass-scenarios" >
-                            <h4>Visible sequence is matching with the reading sequence</h4>
-                            div>
-                                <h1>Main Heading</h1>
-                                <p>This is a paragraph of text that comes after the main heading.</p>
-                                <h2>Subheading 1</h2>
-                                <p>This is a paragraph of text that comes after the first subheading.</p>
-                                <h2>Subheading 2</h2>
-                                <p>This is a paragraph of text that comes after the second subheading.</p>
-                                <ul>
-                                    <li>First item in a list</li>
-                                    <li>Second item in a list</li>
-                                    <li>Third item in a list</li>
-                                </ul>
-                                <table style="border-collapse: collapse; width: 100%;">
-                                    <caption>Monthly Sales</caption>
-                                    <thead>
-                                        <tr>
-                                            <th style="border: 1px solid black; padding: 8px;">Month</th>
-                                            <th style="border: 1px solid black; padding: 8px;">Sales</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid black; padding: 8px;">January</td>
-                                            <td style="border: 1px solid black; padding: 8px;">$1000</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid black; padding: 8px;">February</td>
-                                            <td style="border: 1px solid black; padding: 8px;">$1200</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <p>Final paragraph of text that comes after the table.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Fail Scenarios</h3>
-                        <div class="fail-scenarios">
-                            <h4>Visible sequence is not matching with the reading sequence</h4>
-                            <div>
-                                <h1>Main Heading</h1>
-                                <p>This is a paragraph of text that comes after the main heading.</p>
-                                <h2>Subheading 2</h2>
-                                <p>This is a paragraph of text that comes after the second subheading.</p>
-                                <ul>
-                                    <li>First item in a list</li>
-                                    <li>Third item in a list</li>
-                                    <li>Second item in a list</li>
-                                </ul>
-                                <h2>Subheading 1</h2>
-                                <p>This is a paragraph of text that comes after the first subheading.</p>
-                                <table style="border-collapse: collapse; width: 100%;">
-                                    <caption>Monthly Sales</caption>
-                                    <thead>
-                                        <tr>
-                                            <th style="border: 1px solid black; padding: 8px;">Month</th>
-                                            <th style="border: 1px solid black; padding: 8px;">Sales</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid black; padding: 8px;">February</td>
-                                            <td style="border: 1px solid black; padding: 8px;">$1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid black; padding: 8px;">January</td>
-                                            <td style="border: 1px solid black; padding: 8px;">$1000</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <p>Final paragraph of text that comes after the table.</p>
-                            </div>
-                        </div>
-                    </div>`;
-            }
-        });
-    });
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const criteriaLinks = document.querySelectorAll(".side-nav > ul > li > ul > li > ul > li > a");
-    criteriaLinks.forEach(link => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            const content = this.textContent.trim();
-            const mainSection = document.getElementById("main-content");
-            if (content === "1.3.3 Sensory Characteristics (Level A)") {
-                mainSection.innerHTML = `
-                    <h2>${content}</h2>
-                    <div style="margin-bottom: 20px;">
-                        <h3>Pass Scenarios</h3>
-                        <div class="pass-scenarios">
-                            <h4>Using shape alone</h4>
-    <p>Use the circle shape button to submit and square shape button to cancel.</p>
-    <button style="border-radius: 50%; width: 100px; height: 50px;">Submit (Circle)</button>
-    <button style="border-radius: 0; width: 100px; height: 50px;">Cancel (Square)</button>
-
-    <h4>Using color alone</h4>
-    <p>Use the green color button to submit and red color button to cancel.</p>
-    <div class="button-container">
-        <div class="button-container">
-        <button class="color-button" style="background-color: green; width: 100px; height: 50px;">Submit (Green)</button>
-        <button class="color-button" style="background-color: red; width: 100px; height: 50px;">Cancel (Red)</button>
-    </div>
-    </div>
-
-    <h4>Using size alone</h4>
-    <p>Use the large button to submit and small button to cancel.</p>
-    <button style="font-size: 20px; width: 100px; height: 50px;">Submit (Large)</button>
-    <button style="font-size: 12px; width: 80px; height: 40px;">Cancel (Small)</button>
-
-    <h4>Using visual location alone</h4>
-    <p>Use the left button to go to previous page and right button to go to next page.</p>
-    <div style="display: flex; justify-content: space-between;">
-        <button style="width: 100px; height: 50px;">Left Button</button>
-        <button style="width: 100px; height: 50px;">Right Button</button>
-    </div>
-
-    <h4>Using orientation alone</h4>
-    <p>If you see the text angled in 45 degress that means your application is success</p>
-    <div style="transform: rotate(45deg);">Rotated Text (45 degrees)</div>
-    <div>Normal Text</div>
-
-    <h4>Using sound alone</h4>
-    <p>The status of application is completed successfully on hearing the beep sound.</p>
-    <audio controls>
-        <source src="sound.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <p>Audio description: This application is successfully completed now.</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Fail Scenarios</h3>
-                        <div class="fail-scenarios">
-                            <h4>Using shape alone</h4>
-    <p>Use the circle shape button to submit and square shape button to cancel.</p>
-    <button style="border-radius: 50%; width: 100px; height: 50px;">Button1</button>
-    <button style="border-radius: 0; width: 100px; height: 50px;">Button2</button>
-
-    <h4>Using color alone</h4>
-    <p>Use the green color button to submit and red color button to cancel.</p>
-    <button style="background-color: green; width: 100px; height: 50px;">Button1</button>
-    <button style="background-color: red; width: 100px; height: 50px;">Button2</button>
-
-    <h4>Using size alone</h4>
-    <p>Use the large button to submit and small button to cancel.</p>
-    <button style="font-size: 20px; width: 100px; height: 50px;">Button1</button>
-    <button style="font-size: 12px; width: 50px; height: 20px;">Button2</button>
-
-    <h4>Using visual location alone</h4>
-    <p>Use the left button to go to previous page and right button to go to next page.</p>
-    <div style="display: flex; justify-content: space-between;">
-        <button style="width: 100px; height: 50px;">Button1</button>
-        <button style="width: 100px; height: 50px;">Button2</button>
-    </div>
-
-    <h4>Using orientation alone</h4>
-    <p>If you see the text angled in 45 degress that means your application is success</p>
-    <div style="transform: rotate(45deg); width: 100px; height: 50px; background-color: lightgray;"></div>
-    <div style="width: 100px; height: 50px; background-color: lightgray;"></div>
-
-    <h4>Using sound alone</h4>
-    <p>The status of application is completed on hearing the beep sound.</p>
-    <audio controls style="width: 100%;">
-        <source src="sound.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-                        </div>
-                    </div>`;
-            }
-        });
-    });
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const criteriaLinks = document.querySelectorAll(".side-nav > ul > li > ul > li > ul > li > a");
-    criteriaLinks.forEach(link => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            const content = this.textContent.trim();
-            const mainSection = document.getElementById("main-content");
-            if (content === "1.4.1 Use of Color (Level A)") {
-                mainSection.innerHTML = `
-                    <h2>${content}</h2>
-                    <div style="margin-bottom: 20px;">
-                        <h3>Pass Scenarios</h3>
-                        <div class="pass-scenarios">
-                            <h4>Button with colors and descriptive labels</h4>
-                            <button style="background-color: green; color: white; padding: 10px; border: none;">Submit (Green)</button>
-                            <button style="background-color: red; color: white; padding: 10px; border: none;">Cancel (Red)</button>
-                            <h4>Links with underline inside the paragraphs</h4>
-                            <p>This is a <a href="#" style="text-decoration: underline;">link with underline</a> inside a paragraph.</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>Fail Scenarios</h3>
-                        <div class="fail-scenarios">
-                            <h4>Button with colors and descriptive labels</h4>
-                            <button style="background-color: green; color: white; padding: 10px; border: none;">Button1</button>
-                            <button style="background-color: red; color: white; padding: 10px; border: none;">Button2</button>
-                            <h4>Links with underline inside the paragraphs</h4>
-                            <p style="color: #242424">This is a <a href="#" style="text-decoration: none; color: #6B6B6B;">link without underline</a> inside a paragraph.</p>
-                        </div>
-                    </div>`;
-            }
-        });
-    });
-});
-</script>
-  <script>
-  // Get the modal
-  var modal = document.getElementById("imagedescription");
-
-  // Get the button that opens the modal
-  var btn = document.getElementById("openModal");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close");
-
-  // When the user clicks the button, open the modal
-  btn.onclick = function() {
-    modal.style.display = "block";
-  }
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-</script>
+input:checked + .slider:before {
+ transform: translateX(26px);
+}
+ </style>
 </head>
-
 <body>
-<a href="#perceivable-link" class="skip-link">Skip to Navigation</a>
-  <header class="banner" role="banner">
-    <h1>WCAG 2.1 Guidelines Examples</h1>
-    <div>
-      <a href="https://www.w3.org/TR/WCAG21/" target="_blank">WCAG 2.1 Documentation</a>
- <a href="ui-non-ui-elements.html" target="_blank" style="margin-left: 15px;">UI and Non-UI Elements</a>
-      </div>
-  </header>
+ <h1>UI and Non-UI Elements</h1>
+ <h2 class="main-page">Main Page</h2>
+ <div class="container">
+ <div class="left">
+ <h3>UI Elements</h3>
+ <div class="tree">
+ <ul>
+ <li><div class="element"><a href="#">Link</a></div></li>
+ <li><div class="element"><button>Button</button></div></li>
+ <li><div class="element">
+ <input type="radio" name="radio" id="radio1">
+ <label for="radio1">Radio Button</label>
+ </div></li>
+ <li><div class="element">
+ <input type="checkbox" id="checkbox1">
+ <label for="checkbox1">Checkbox</label>
+ </div></li>
+ <li><div class="element">
+ <label for="dropdown">Dropdown:</label>
+ <select id="dropdown">
+ <option>Option 1</option>
+ <option>Option 2</option>
+ <option>Option 3</option>
+ </select>
+ </div></li>
+ <li><div class="element">
+ <label for="menu">Menu:</label>
+ <select id="menu">
+ <option>Menu Item 1</option>
+ <option>Menu Item 2</option>
+ <option>Menu Item 3</option>
+ </select>
+ </div></li>
+ <li><div class="element">
+ <label for="combobox">Combo Box:</label>
+ <input type="text" id="combobox" list="combobox-options">
+ <datalist id="combobox-options">
+ <option value="Option 1">
+ <option value="Option 2">
+ <option value="Option 3">
+ </datalist>
+ </div></li>
+ <li><div class="element">
+ <label for="datepicker">Date Picker:</label>
+ <input type="date" id="datepicker">
+ </div></li>
+ <li><div class="element">
+ <label for="optional-edit">Optional Edit Box:</label>
+ <input type="text" id="optional-edit">
+ </div></li>
+ <li><div class="element">
+ <label for="required-edit">Required Edit Box:</label>
+ <input type="text" id="required-edit" required>
+ </div></li>
+ <li><div class="element">
+ <label for="password-edit">Password Edit Box:</label>
+ <input type="password" id="password-edit">
+ </div></li>
+ <li><div class="element">
+ <label for="search-edit">Search Edit Box:</label>
+ <input type="search" id="search-edit">
+ </div></li>
+ <li><div class="element">
+ <label for="multiline-edit">Multiline Edit Box:</label>
+ <textarea id="multiline-edit"></textarea>
+ </div></li>
+ <li><div class="element">
+ <h3>Accordion</h3>
+ <details>
+ <summary>Section 1</summary>
+ <p>Content for section 1.</p>
+ </details>
+ <details>
+ <summary>Section 2</summary>
+ <p>Content for section 2.</p>
+ </details>
+ </div></li>
+ <li><div class="element">
+ <label for="toggle-button">Toggle Button:</label>
+ <label class="toggle-switch">
+ <input type="checkbox" id="toggle-button">
+ <span class="slider"></span>
+ </label>
+ </div></li>
+ <li><div class="element">
+ <h3>Carousel Section</h3>
+ <!-- Carousel code would go here -->
+ </div></li>
+ </ul>
+ </div>
+ </div>
+ <div class="right">
+ <h3>Non-UI Elements</h3>
+ <div class="tree">
+ <ul>
+ <li><div class="element">
+ <p>This is a paragraph of text.</p>
+ </div></li>
+ <li><div class="element">
+ <ul>
+ <li>Unordered List Item 1</li>
+ <li>Unordered List Item 2</li>
+ <li>Unordered List Item 3</li>
+ </ul>
+ <ol>
+ <li>Ordered List Item 1</li>
+ <li>Ordered List Item 2</li>
+ <li>Ordered List Item 3</li>
+ </ol>
+ </div></li>
+ <li><div class="element">
+ <table>
+ <tr>
+ <th>Header 1</th>
+ <th>Header 2</th>
+ <th>Header 3</th>
+ </tr>
+ <tr>
+ <td>Row 1, Cell 1</td>
+ <td>Row 1, Cell 2</td>
+ <td>Row 1, Cell 3</td>
+ </tr>
+ <tr>
+ <td>Row 2, Cell 1</td>
+ <td>Row 2, Cell 2</td>
+ <td>Row 2, Cell 3</td>
+ </tr>
+ </table>
+ </div></li>
+ <li><div class="element">
+ <h3>Heading</h3>
+ <p>This is a heading example.</p>
+ </div></li>
+ <li><div class="element">
+ <img src="https://via.placeholder.com/150" alt="Informative Image">
+ </div></li>
+ </ul>
+ </div>
+ </div>
+ </div>
 
-   <div class="container">
-    <nav class="side-nav">
-      <h2>Accessibility Principles</h2>
-      <ul>
-        <li><a href="#" id="perceivable-link">Perceivable</a>
-          <ul>
-            <li><a href="#">1.1 Text Alternatives</a>
-              <ul>
-                <li><a href="#">1.1.1 Non-text Content (Level A)</a></li>
-              </ul>
-            </li>
-            <li><a href="#">1.2 Time-based Media</a>
-              <ul>
-                <li><a href="#">1.2.1 Audio-only and Video-only (Pre-recorded) (Level A)</a></li>
-                <li><a href="#">1.2.2 Captions (Pre-recorded) (Level A)</a></li>
-                <li><a href="#">1.2.3 Audio Description or Media Alternative (Pre-recorded) (Level A)</a></li>
-              </ul>
-            </li>
-            <li><a href="#">1.3 Adaptable</a>
-              <ul>
-                <li><a href="#">1.3.1 Info and Relationships (Level A)</a></li>
-                <li><a href="#">1.3.2 Meaningful Sequence (Level A)</a></li>
-                <li><a href="#">1.3.3 Sensory Characteristics (Level A)</a></li>
-              </ul>
-            </li>
-            <li><a href="#">1.4 Distinguishable</a>
-              <ul>
-                <li><a href="#">1.4.1 Use of Color (Level A)</a></li>
-                <li><a href="#">1.4.3 Contrast (Minimum) (Level AA)</a></li>
-                <li><a href="#">1.4.4 Resize Text (Level AA)</a></li>
-                <li><a href="#">1.4.5 Images of Text (Level AA)</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="#">Operable</a>
-          <ul>
-            <li><a href="#">2.1 Keyboard Accessible</a>
-              <ul>
-                <li><a href="#">2.1.1 Keyboard (Level A)</a></li>
-                <li><a href="#">2.1.2 No Keyboard Trap (Level A)</a></li>
-              </ul>
-            </li>
-            <li><a href="#">2.2 Enough Time</a>
-              <ul>
-                <li><a href="#">2.2.1 Timing Adjustable (Level A)</a></li>
-                <li><a href="#">2.2.2 Pause, Stop, Hide (Level AA)</a></li>
-              </ul>
-            </li>
-            <li><a href="#">2.3 Seizures and Physical Reactions</a>
-              <ul>
-                <li><a href="#">2.3.1 Three Flashes or Below Threshold (Level A)</a></li>
-                <li><a href="#">2.3.2 Three Flashes (Level AA)</a></li>
-              </ul>
-            </li>
-            <li><a href="#">2.4 Navigable</a>
-              <ul>
-                <li><a href="#">2.4.1 Bypass Blocks (Level A)</a></li>
-                <li><a href="#">2.4.2 Page Titled (Level A)</a></li>
-                <li><a href="#">2.4.5 Multiple Ways (Level AA)</a></li>
-                <li><a href="#">2.4.6 Headings and Labels (Level AA)</a></li>
-              </ul>
-            </li>
-            <li><a href="#">2.5 Input Modalities</a>
-              <ul>
-                <li><a href="#">2.5.1 Pointer Gestures (Level A)</a></li>
-                <li><a href="#">2.5.3 Label in Name (Level AA)</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="#">Understandable</a>
-          <ul>
-            <li><a href="#">3.1 Readable</a>
-              <ul>
-                <li><a href="#">3.1.1 Language of Page (Level A)</a></li>
-                <li><a href="#">3.1.2 Language of Parts (Level AA)</a></li>
-              </ul>
-            </li>
-            <li><a href="#">3.2 Predictable</a>
-              <ul>
-                <li><a href="#">3.2.1 On Focus (Level A)</a></li>
-                <li><a href="#">3.2.3 Consistent Navigation (Level AA)</a></li>
-                <li><a href="#">3.2.4 Consistent Identification (Level AA)</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="#">Robust</a>
-          <ul>
-            <li><a href="#">4.1 Compatible</a>
-              <ul>
-                <li><a href="#">4.1.1 Parsing (Level A)</a></li>
-                <li><a href="#">4.1.2 Name, Role, Value (Level A)</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <main id="main-content" class="main-section"></main>
-  </div>
-<footer class="page-footer">
-<ul>
-<li><a href="mailto:support@example.com">Contact Us</a></li>
-<li><a href="mailto:support@example.com">WCAG 2.1 PDF
-<img src="C:\Users\kirankumartb\OneDrive - Virtusa\Training\A11YWebExampleProject\1.1.1Images\pdf-icon.png" alt="" class="pdf-icon"> </a></li>
-<li><a href="mailto:support@example.com">Talkback Gestures
-<img src="C:\Users\kirankumartb\OneDrive - Virtusa\Training\A11YWebExampleProject\1.1.1Images\pdf-icon.png" alt="" class="pdf-icon"> </a></li>
-<li><a href="mailto:support@example.com">Voiceover Gestures
-<img src="C:\Users\kirankumartb\OneDrive - Virtusa\Training\A11YWebExampleProject\1.1.1Images\pdf-icon.png" alt="" class="pdf-icon"> </a></li>
-</ul>
-</footer>
+ <script>
+ // Function to animate elements one by one
+ function animateElements() {
+ const elements = document.querySelectorAll('.element');
+ elements.forEach((element, index) => {
+ setTimeout(() => {
+ element.classList.add('visible');
+ }, index * 200); // Delay each element by 200ms
+ });
+ }
+
+ // Trigger the animation when the page loads
+ window.onload = animateElements;
+ </script>
 </body>
 </html>
