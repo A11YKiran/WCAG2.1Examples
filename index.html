@@ -337,7 +337,41 @@ margin-right: 5px;      /* Add space between icon and text */
     justify-content: center;
     font-size: 14px; /* Adjust font size as needed */
 }
+.imgdesmodal { /* Changed class name here */
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 
+  /* Style for the modal content */
+.imgdesmodal-content { /* Changed class name here */
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  /* Style for the close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -382,6 +416,40 @@ margin-right: 5px;      /* Add space between icon and text */
                             <img src="butterflylifecycle.jpg" alt="Illustration of the butterfly life cycle showing the stages: egg on a leaf, caterpillar, chrysalis (pupa), and adult butterfly, arranged in a circular sequence." style="width: 50%; height: auto; display: block; margin-bottom: 10px;">
                             <h4>Image with Long Description</h4>
                             <img src="complex-diagram.jpg" alt="Complex flowchart showing interconnected processes with a long description provided below" style="width: 50%; height: auto; display: block; margin-bottom: 10px;">
+                            <p><a href="#" id="openModal">View Detailed Description</a></p>
+
+<div id="imagedescription" class="imgdesmodal">  <div class="imgdesmodal-content"> <span class="close">&times;</span>
+    <p>
+      **Overall Image:**
+
+      The image presents a visualization of website traffic data using a combination of a stacked column chart and a line graph. It aims to show the year-over-year growth of new and returning visitors to a website from 2011 to 2022. The chart is titled "How to Visualize Data Using Year-Over-Year Growth Chart?" and includes a legend at the bottom clarifying the two data series.
+
+      **Chart Elements:**
+
+      * **Stacked Column Chart:** The primary visual is a stacked column chart. Each column represents a year from 2011 to 2022. The columns are divided into two segments, representing the number of new visitors (blue segment) and returning visitors (red segment) for that year. The height of each segment corresponds to the respective visitor count.
+      * **Line Graph:** A black line graph is overlaid on the column chart. This line graph seems to represent the overall trend or perhaps a specific metric related to the visitor data (though it's not clearly labeled). It fluctuates over the years, showing peaks and valleys in correlation with the changes in the columns.
+      * **Horizontal Bars:** Two horizontal bars are placed above and below the chart. The top bar is blue, matching the "New Visitors" color, and the bottom bar is red, matching the "Returning Visitors" color. These bars are segmented to represent the values of 100k, 75k, 50k, 25k, and 0, essentially acting as a secondary horizontal axis or scale.
+      * **Y-Axis:** The left side of the chart features a vertical y-axis labeled with values from 0 to 100k, with tick marks at 25k intervals. This axis measures the number of visitors.
+      * **X-Axis:** The bottom of the chart represents the years, running from 2011 to 2022.
+      * **Data Labels:** Each segment of the stacked column has a numerical label indicating the visitor count (in thousands). For instance, the first column (2011) shows 20k new visitors and 10k returning visitors.
+      * **Title and Legend:** The chart has a title at the bottom: "How to Visualize Data Using Year-Over-Year Growth Chart?". A simple legend below the title clarifies the color coding: blue for "New Visitors" and red for "Returning Visitors".
+
+      **Observations and Interpretations:**
+
+      * **Growth Trend:** The chart visually depicts the growth in both new and returning visitors over the 12-year period. It seems there's a general upward trend, suggesting increasing website traffic.
+      * **Fluctuations:** The line graph and the columns indicate fluctuations in website traffic over the years. There are periods of growth and decline, which could be related to various factors like marketing campaigns, seasonality, or changes in website content.
+      * **Composition of Traffic:** The stacked column chart allows for easy comparison of the proportion of new vs. returning visitors each year. This provides insights into user engagement and customer loyalty.
+      * **Potential Insights:** By analyzing the chart, one could potentially identify periods of significant growth or decline, understand the impact of specific events on website traffic, and make data-driven decisions to improve website performance and user engagement.
+
+      **Possible Missing Information:**
+
+      * **Line Graph Clarity:** The exact meaning and scale of the line graph are unclear without a proper label or secondary y-axis.
+      * **Context:** The chart lacks context about the website or industry it represents. This information would help in better interpreting the data.
+
+      **Overall, the image is a good representation of visualizing year-over-year growth using a combination chart. It effectively conveys the trends and composition of website traffic, although some additional labeling and context could enhance its clarity.**
+    </p>
+  </div>
+</div>
                             <h4>Logo Image</h4>
                             <img src="logo.png" alt="Company logo" style="width: 20%; height: auto; display: block; margin-bottom: 10px;">
                             <h4>Icon used without visible label</h4>
@@ -874,6 +942,33 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+</script>
+  <script>
+  // Get the modal
+  var modal = document.getElementById("imagedescription");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("openModal");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close");
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 </script>
 </head>
 
